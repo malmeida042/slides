@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Slides | Desdobro SGAS 906</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#101a20;
+      --paper:#f5f1e8;
+      --ink:#182024;
+      --muted:#576168;
+      --accent:#ef4444;
+      --accent2:#0f8d78;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Source Sans 3", "Segoe UI", sans-serif;
+      background:#090f13;
+      color:#fff;
+      overflow:hidden;
+    }
+    .deck{
+      position:fixed;
+      inset:0;
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      padding:2.4rem 3.2rem 1.2rem;
+      background:
+        radial-gradient(40rem 18rem at 0% 0%, rgba(239,68,68,.25), transparent 55%),
+        radial-gradient(35rem 16rem at 100% 100%, rgba(15,141,120,.22), transparent 55%),
+        #101a20;
+      opacity:0;
+      transform:translateX(40px);
+      transition:opacity .45s ease, transform .45s ease;
+      pointer-events:none;
+    }
+    .slide.active{
+      opacity:1;
+      transform:translateX(0);
+      pointer-events:auto;
+    }
+    .head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:1rem;
+    }
+    .kicker{
+      font-family:"Oswald", Impact, sans-serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.85rem;
+      color:#c4d0d6;
+    }
+    h1,h2{
+      margin:.2rem 0;
+      font-family:"Oswald", Impact, sans-serif;
+      letter-spacing:.02em;
+      line-height:1.02;
+    }
+    h1{font-size:3rem}
+    h2{font-size:2.2rem}
+    .body{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:1.15rem;
+      min-height:0;
+    }
+    .panel{
+      background:var(--paper);
+      color:var(--ink);
+      border-radius:1rem;
+      border:1px solid #d7cfc0;
+      padding:1rem;
+      min-height:0;
+      overflow:hidden;
+    }
+    .panel img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:.7rem;
+      border:1px solid #d8cec0;
+      background:#dce5ea;
+    }
+    .list{
+      display:grid;
+      gap:.55rem;
+      margin-top:.5rem;
+    }
+    .list div{
+      border-left:4px solid var(--accent2);
+      background:#fff;
+      border-radius:.5rem;
+      padding:.5rem .65rem;
+      color:#243037;
+      font-weight:600;
+    }
+    .foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:.65rem;
+      color:#cbd4da;
+      font-size:.9rem;
+    }
+    .pill{
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.35);
+      border-radius:999px;
+      padding:.22rem .62rem;
+    }
+    .progress{
+      height:.32rem;
+      background:rgba(255,255,255,.18);
+      border-radius:1rem;
+      overflow:hidden;
+      width:15rem;
+    }
+    .progress span{
+      display:block;
+      height:100%;
+      background:linear-gradient(90deg, #ef4444, #f59e0b);
+      width:0%;
+      transition:width .35s ease;
+    }
+    .controls{
+      position:fixed;
+      right:.9rem;
+      bottom:.9rem;
+      display:flex;
+      gap:.45rem;
+      z-index:10;
+    }
+    .controls button{
+      border:1px solid rgba(255,255,255,.45);
+      background:rgba(6,12,16,.75);
+      color:#fff;
+      border-radius:.5rem;
+      padding:.35rem .55rem;
+      cursor:pointer;
+      font-weight:700;
+    }
+    @media (max-width:940px){
+      .slide{padding:1.3rem}
+      h1{font-size:2.1rem}
+      h2{font-size:1.8rem}
+      .body{grid-template-columns:1fr}
+      .progress{width:10rem}
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide active">
+      <header class="head">
+        <div>
+          <div class="kicker">Conselho | Estudo de Desdobro</div>
+          <h1>Desdobro Proposto<br>SGAS 906</h1>
+        </div>
+        <span class="pill">Slide 1/6</span>
+      </header>
+      <div class="body">
+        <article class="panel">
+          <div class="list">
+            <div>Objetivo: comunicar o desdobro do lote 8 com clareza para decisao.</div>
+            <div>Base usada: planta tecnica + ortofoto com sobreposicao de limites.</div>
+            <div>Foco: porcao proposta para aquisicao pela Igreja Presbiteriana.</div>
+          </div>
+        </article>
+        <article class="panel">
+          <img src="../reference/isometrica-orto-maps.png" alt="Visao isometrica">
+        </article>
+      </div>
+      <footer class="foot">
+        <span>Teclas: seta esquerda/direita</span>
+        <div class="progress"><span></span></div>
+      </footer>
+    </section>
+
+    <section class="slide">
+      <header class="head">
+        <div>
+          <div class="kicker">Etapa 1</div>
+          <h2>Situacao Atual dos Lotes 7, 8 e 9</h2>
+        </div>
+        <span class="pill">Slide 2/6</span>
+      </header>
+      <div class="body">
+        <article class="panel"><img src="../reference/ortofoto-maps-implantacao.png" alt="Ortofoto geral"></article>
+        <article class="panel">
+          <div class="list">
+            <div>Lotes em sequencia na frente da SGAS 906 - Via W5 Sul.</div>
+            <div>Leitura do contexto urbano e implantacao existente.</div>
+            <div>Sem alteracao de geometria nesta fase.</div>
+          </div>
+        </article>
+      </div>
+      <footer class="foot"><span>Contextualizacao espacial</span><div class="progress"><span></span></div></footer>
+    </section>
+
+    <section class="slide">
+      <header class="head">
+        <div>
+          <div class="kicker">Etapa 2</div>
+          <h2>Limite de Desdobro no Lote 8</h2>
+        </div>
+        <span class="pill">Slide 3/6</span>
+      </header>
+      <div class="body">
+        <article class="panel"><img src="../generated/pdf2-main.png" alt="Limite de desdobro"></article>
+        <article class="panel">
+          <div class="list">
+            <div>Limite tracejado em vermelho indicando area de desdobro.</div>
+            <div>Medidas de referencia: 50 x 151.8.</div>
+            <div>Base conferida com planta tecnica oficial.</div>
+          </div>
+        </article>
+      </div>
+      <footer class="foot"><span>Destaque da alteracao proposta</span><div class="progress"><span></span></div></footer>
+    </section>
+
+    <section class="slide">
+      <header class="head">
+        <div>
+          <div class="kicker">Etapa 3</div>
+          <h2>Bloco da Igreja e Porcao Vinculada</h2>
+        </div>
+        <span class="pill">Slide 4/6</span>
+      </header>
+      <div class="body">
+        <article class="panel"><img src="../generated/pdf1-bloco01-rot.png" alt="Bloco 01"></article>
+        <article class="panel">
+          <div class="list">
+            <div>Bloco 01 - Igreja Presbiteriana (edificacao existente).</div>
+            <div>Area de construcao indicada: 9,948.59 m2.</div>
+            <div>Narrativa de aquisicao focada na porcao de desdobro.</div>
+          </div>
+        </article>
+      </div>
+      <footer class="foot"><span>Conexao entre dado tecnico e decisao</span><div class="progress"><span></span></div></footer>
+    </section>
+
+    <section class="slide">
+      <header class="head">
+        <div>
+          <div class="kicker">Etapa 4</div>
+          <h2>Fechamento Executivo</h2>
+        </div>
+        <span class="pill">Slide 5/6</span>
+      </header>
+      <div class="body">
+        <article class="panel"><img src="../generated/pdf1-01.png" alt="Planta completa"></article>
+        <article class="panel">
+          <div class="list">
+            <div>Mensagem central: desdobro localizado no lote 8.</div>
+            <div>Quadro visual pronto para leitura de conselho.</div>
+            <div>Formato replicavel para novas apresentacoes de lote.</div>
+          </div>
+        </article>
+      </div>
+      <footer class="foot"><span>Resumo para tomada de decisao</span><div class="progress"><span></span></div></footer>
+    </section>
+
+    <section class="slide">
+      <header class="head">
+        <div>
+          <div class="kicker">Proximos passos</div>
+          <h2>Pacote de entrega pronto</h2>
+        </div>
+        <span class="pill">Slide 6/6</span>
+      </header>
+      <div class="body">
+        <article class="panel">
+          <div class="list">
+            <div>Docs: plano completo + prompts com anexos.</div>
+            <div>Landing local para apresentacao interativa.</div>
+            <div>Base pronta para iteracao visual final.</div>
+            <div>Opcional: gerar video curto usando os frames selecionados.</div>
+          </div>
+        </article>
+        <article class="panel"><img src="../reference/isometrica-2-orto-maps.png" alt="Visao final"></article>
+      </div>
+      <footer class="foot"><span>Encerramento</span><div class="progress"><span></span></div></footer>
+    </section>
+  </main>
+
+  <div class="controls">
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const bars = Array.from(document.querySelectorAll(".progress span"));
+    let i = 0;
+    function update(){
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      bars.forEach((b, idx) => b.style.width = idx <= i ? "100%" : "0%");
+    }
+    function next(){ i = (i + 1) % slides.length; update(); }
+    function prev(){ i = (i - 1 + slides.length) % slides.length; update(); }
+    document.getElementById("next").addEventListener("click", next);
+    document.getElementById("prev").addEventListener("click", prev);
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "ArrowRight" || e.key === "PageDown") next();
+      if(e.key === "ArrowLeft" || e.key === "PageUp") prev();
+    });
+    update();
+  </script>
+</body>
+</html>

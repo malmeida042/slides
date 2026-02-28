@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apresentacao | Projeto</title>
+  <style>
+    :root {
+      --bg: #0b1014;
+      --panel: #0f1820;
+      --text: #f3f7fb;
+      --muted: #9db0c2;
+      --line: rgba(255, 255, 255, 0.16);
+      --accent: #59c3a6;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(1200px 500px at 50% -20%, #17314a 0%, transparent 60%), var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .topbar {
+      height: 86px;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(92, 17, 24, 0.96) 0%, rgba(64, 12, 17, 0.96) 100%);
+      backdrop-filter: blur(6px);
+      min-width: 0;
+    }
+
+    .logos {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 0 0 auto;
+    }
+
+    .logo-frame {
+      height: 58px;
+      padding: 0.2rem 0.35rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.98);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-frame img {
+      height: 100%;
+      width: auto;
+      max-width: 170px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .project-title {
+      margin: 0;
+      font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .topbar-filler {
+      width: 210px;
+      flex: 0 0 210px;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 0;
+      padding: 0.6rem;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .media {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #0f1820;
+    }
+
+    img.media {
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .zoom-wrap {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: #0f1820;
+    }
+
+    .zoom-wrap.zoomed {
+      overflow: auto;
+      cursor: grab;
+      scrollbar-width: thin;
+    }
+
+    .zoom-wrap.dragging {
+      cursor: grabbing;
+    }
+
+    .zoom-media {
+      width: 100%;
+      height: 100%;
+      transition: width 180ms ease, height 180ms ease;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .zoom-media.zoomed {
+      width: 200%;
+      height: 200%;
+      max-width: none;
+      max-height: none;
+    }
+
+    .controls {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(11, 16, 20, 0.92);
+      color: var(--text);
+      font-size: 1.03rem;
+      font-weight: 700;
+      padding: 0.68rem 1.02rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 720px) {
+      .topbar { height: 70px; padding: 0 0.55rem; }
+      .logo-frame { height: 45px; }
+      .logo-frame img { max-width: 120px; }
+      .topbar-filler { width: 0; flex-basis: 0; }
+      .stage { padding: 0.45rem; }
+      .btn { padding: 0.56rem 0.82rem; font-size: 0.96rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logos" aria-label="Logos do projeto">
+      <div class="logo-frame">
+        <img src="APRESENTAÇÃO/LOGO GFA PROJETOS.png" alt="Logo GFA Projetos" />
+      </div>
+      <div class="logo-frame">
+        <img src="APRESENTAÇÃO/LOGO IGREJA PRESBITERIANA.png" alt="Logo Igreja Presbiteriana" />
+      </div>
+    </div>
+    <h1 class="project-title" id="projectTitle"></h1>
+    <div class="topbar-filler" aria-hidden="true"></div>
+  </header>
+
+  <main class="stage" id="stage" aria-live="polite"></main>
+
+  <nav class="controls" aria-label="Navegacao de slides">
+    <button class="btn" id="prevBtn" type="button">Anterior</button>
+    <button class="btn" id="nextBtn" type="button">Proximo</button>
+  </nav>
+
+  <script>
+    // Escopo adaptavel: edite somente este bloco para trocar titulo e arquivos.
+    const presentation = {
+      title: "DESBOBRO-SGAS 906 SUL-IGREJA PRESBITERIANA",
+      slides: [
+        {
+          type: "image",
+          src: "APRESENTAÇÃO/SLIDE1.png",
+          alt: "Planta diagramada com ortofoto em alta qualidade",
+          zoomable: true
+        },
+        {
+          type: "image",
+          src: "APRESENTAÇÃO/SLIDE2.png",
+          alt: "Planta urbanistica com informacoes tecnicas",
+          zoomable: true
+        },
+        {
+          type: "gif",
+          src: "APRESENTAÇÃO/SLIDE3.gif",
+          alt: "Animacao de transformacao do projeto"
+        }
+      ]
+    };
+
+    const titleEl = document.getElementById("projectTitle");
+    const stageEl = document.getElementById("stage");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let current = 0;
+
+    function createSlide(slide) {
+      const section = document.createElement("section");
+      section.className = "slide";
+
+      if (slide.type === "pdf") {
+        const frame = document.createElement("iframe");
+        frame.className = "media";
+        frame.src = `${slide.src}#view=FitH`;
+        frame.title = "Slide PDF";
+        section.appendChild(frame);
+      } else {
+        const img = document.createElement("img");
+        img.className = slide.zoomable ? "media zoom-media" : "media";
+        img.src = slide.src;
+        img.alt = slide.alt || "Slide";
+
+        if (slide.zoomable) {
+          const zoomWrap = document.createElement("div");
+          zoomWrap.className = "zoom-wrap";
+          zoomWrap.appendChild(img);
+          setupZoomPan(zoomWrap, img);
+          section.appendChild(zoomWrap);
+        } else {
+          section.appendChild(img);
+        }
+      }
+
+      return section;
+    }
+
+    function setupZoomPan(wrap, img) {
+      let isZoomed = false;
+      let isDragging = false;
+      let moved = false;
+      let startX = 0;
+      let startY = 0;
+      let startLeft = 0;
+      let startTop = 0;
+
+      function setZoom(nextState) {
+        isZoomed = nextState;
+        wrap.classList.toggle("zoomed", isZoomed);
+        img.classList.toggle("zoomed", isZoomed);
+
+        if (isZoomed) {
+          requestAnimationFrame(() => {
+            wrap.scrollLeft = (wrap.scrollWidth - wrap.clientWidth) / 2;
+            wrap.scrollTop = (wrap.scrollHeight - wrap.clientHeight) / 2;
+          });
+        } else {
+          wrap.scrollLeft = 0;
+          wrap.scrollTop = 0;
+          isDragging = false;
+          moved = false;
+          wrap.classList.remove("dragging");
+        }
+      }
+
+      wrap.addEventListener("click", () => {
+        if (moved) {
+          moved = false;
+          return;
+        }
+        setZoom(!isZoomed);
+      });
+
+      wrap.addEventListener("mousedown", (event) => {
+        if (!isZoomed || event.button !== 0) return;
+        isDragging = true;
+        moved = false;
+        startX = event.clientX;
+        startY = event.clientY;
+        startLeft = wrap.scrollLeft;
+        startTop = wrap.scrollTop;
+        wrap.classList.add("dragging");
+        event.preventDefault();
+      });
+
+      window.addEventListener("mousemove", (event) => {
+        if (!isDragging) return;
+        const deltaX = event.clientX - startX;
+        const deltaY = event.clientY - startY;
+        if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) moved = true;
+        wrap.scrollLeft = startLeft - deltaX;
+        wrap.scrollTop = startTop - deltaY;
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!isDragging) return;
+        isDragging = false;
+        wrap.classList.remove("dragging");
+      });
+    }
+
+    function renderSlides() {
+      stageEl.innerHTML = "";
+      presentation.slides.forEach((slide) => {
+        stageEl.appendChild(createSlide(slide));
+      });
+    }
+
+    function showSlide(index) {
+      const nodes = Array.from(document.querySelectorAll(".slide"));
+      nodes.forEach((node, idx) => {
+        node.classList.toggle("active", idx === index);
+      });
+    }
+
+    function nextSlide() {
+      current = (current + 1) % presentation.slides.length;
+      showSlide(current);
+    }
+
+    function prevSlide() {
+      current = (current - 1 + presentation.slides.length) % presentation.slides.length;
+      showSlide(current);
+    }
+
+    titleEl.textContent = presentation.title;
+    renderSlides();
+    showSlide(current);
+
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown") nextSlide();
+      if (event.key === "ArrowLeft" || event.key === "PageUp") prevSlide();
+    });
+  </script>
+</body>
+</html>
